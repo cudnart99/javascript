@@ -1,1 +1,1 @@
-# javascript
+- có thể vào file text.txt để xem rõ hơn
