@@ -1,0 +1,138 @@
+// // Destructuring Assignment là một cú pháp cho phép tách dữ liệu được lưu trữ 
+// // bên trong (nested) Objects hoặc Arrays (tổng quát hơn là các iterable values) 
+// // và gán chúng cho các biến riêng biệt.
+----------------------------------------------------------------------------------------------------------
+// // Array destructuring 
+
+// // ví dụ
+// const [a,b,...c] = [1,2,3,4,5];
+// console.log(a,b,c); // [1,2,[3,4,5]]
+----------------------------------------------------------------------------------------------------------
+// // một số chức năng của array destructuring
+// // gán giá trị cho biến 
+// const res = [1,2,3,4];
+// const [a,b,c] = res;
+// console.log(a,b,c); //1,2,3
+
+// // đổi chỗ 
+// var a = 1,b = 2;
+// [a,b] =[b,a];
+// console.log(a,b); //2,1
+
+// // bỏ qua giá trị
+// const arr = [1, 2, 3];
+// const [a, ,b] = arr;
+// console.log(a, b) ;//1,3
+
+// // gán giá trị cho biến mới 
+// const arr2 = {
+//     a : "hello",
+//     b : "hi"
+// }
+
+// const {
+//     a : c,
+//     b : d
+// } = arr2;
+
+// console.log(c,d); // hello hi
+----------------------------------------------------------------------------------------------------------
+// Object destructuring 
+
+// let SV = {
+//     name : "Duc",
+//     mssv : 20192787,
+//     class : "Dientu-06"
+// };
+
+// const {name : a , mssv : b , class : c } = SV; 
+
+// console.log(a,b,c); // Duc 20192787 Dientu-06
+
+// đây là cách viết đầy đủ , nếu biến cần lưu trùng tên với property của object
+// , ta có thể viết như sau : 
+// const {name , mssv , class} = SV;
+// console.log(name,mssv,class); 
+// -> ta cũng thu được kết quẩ là Duc 20192787 Dientu-06
+
+// Khi sử dụng Object Destructuring trên một giá trị cụ thể, giá trị đó sẽ được ép kiểu về Object.
+// Tuy nhiên việc ép kiểu không sử dụng Object() constructor mà sẽ sử dụng toObject().
+// Điểm khác nhau cơ bản giữa hai phương thức này là object constructor sẽ convert các 
+// giá trị null và undefined về empty object còn toObject sẽ trả về một exception (TypeError).
+
+// Object('abc');     // String abc
+// Object(123);       // Number 123
+// Object(undefined); // Object {}
+// Object(null);      // Object {}
+
+// let {x} = undefined; // TypeError
+// let {y} = null;      // TypeError
+----------------------------------------------------------------------------------------------------------
+// Default values
+// let demo = {
+//     a : 1,
+//     b : 2,
+//     c : "hello"
+// }
+// let  {a = 4 , b = 5 , c  = 6, d = 10} = demo;
+// console.log(a,b,c,d); // 1 2 "hello" 10
+
+// let  {a = 4 , b = 5 , c  = 6, d } = demo;
+// console.log(a,b,c,d); // 1 2 "hello" undefined
+
+// -> ta thấy :
+// nếu property không tồn tại giá trị mặc định sẽ được sử dụng
+// nếu ko cung cấp giá trị mặc định thì sẽ là undefined  
+// nếu property của object tồn tại, giá trị của property đó sẽ được sử dụng 
+
+// Nếu giá trị được gán là undefined, default value sẽ được sử dụng:
+// const [x = 1] = [undefined];
+// console.log(x); // 1
+
+//Default value không nhất thiết phải là một giá trị cố định,
+// nó có thể là kết quả của function invocation
+
+// một số chú ý thứ tự 
+// const [x=3, y=x] = [];     // trường hợp này ko có giá trị nên x=3 
+//                            // là giá trị mặc định và y = x = 3
+// const [x=3, y=x] = [7];    // x = 7 là giá trị của mảng , y = x = 7
+// const [x=3, y=x] = [7, 2]; // x = 7 là giá trị của mảng , y = 2 là giá trị của mảng 
+//                            // y không = x do y = x là giá trị mặc định nên bỏ qua khi mảng có giá trị
+// const [x=y, y=3] = [];     // mảng không có giá trị và y chưa được khai báo -> x bị ReferenceError
+
+----------------------------------------------------------------------------------------------------------
+// Nested destructuring 
+
+// ví dụ :
+// let numbers = [1, [2, 3, 4], 5];
+// let [a, [b, c, d], e] = numbers;
+// console.log(a, b, c, d, e); // 1 2 3 4 5
+
+// let person = { name: 'Foo', age: 15, information: {address: 'Bar', phone: '0199999999'} };
+// let {name, age, information: {address, phone}} = person;
+// console.log(name);    // Foo
+// console.log(age);     // 15
+// console.log(address); // Bar
+// console.log(phone);   // 0199999999
+----------------------------------------------------------------------------------------------------------
+//Destructuring Parameters
+
+//Khi chúng ta thực thi một function với các arguments, trên thực tế các arguments đó sẽ được 
+//gán cho các parameters được định nghĩa trong function definition. Do đó, chúng ta hoàn toàn 
+//có thể sử dụng Destructuring Assignment cho function parameters
+
+// // Array destructuring for parameters
+// function foo([a, b]) {
+//     console.log(a + b);
+// }
+// foo([1, 2]); // 3
+
+// // Object destructuring for parameters
+// function bar({x, y}) {
+//     console.log(x, y);
+// }
+// foo({x: 1, y: 2}); // 1 2
+// foo({});           // undefined undefined
+
+// -> ta thấy trong ví dụ trên {x,y} và [a,b] đều có thể coi là parameters cho function
+----------------------------------------------------------------------------------------------------------

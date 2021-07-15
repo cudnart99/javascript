@@ -1,0 +1,59 @@
+// object.assign() : sao chép các giá trị của tất cả các thuộc tính 
+// từ 1 hoặc nhiều object vào 1 object khác 
+// ví dụ : 
+
+const sinhVien = { 
+    name : "Ben",
+    age : '20'
+}
+
+const mssv = {mssv : 20192787}
+
+const info = Object.assign({id : 001},sinhVien,mssv);
+
+console.log(info); //{id: 1, name: "Ben", age: "20", mssv: 20192787}
+
+// Object.create() : tạo object mới sử dụng 1 obj hiện có để cung cấp 
+//_proto_ của object mới được tạo ra 
+
+S = {
+	tinhToan: function(){
+		return this.a + this.b		
+	}
+};
+var Tong = Object.create(S);
+
+// Adding properties to the A object
+Tong.a = 2;
+Tong.b = 3;
+
+console.log(Tong.tinhToan()); //5
+
+// object.keys() trả về một mảng các tên thuộc tính đếm được 
+// một object đã cho
+
+var obj = {
+    name : "Ben",
+    age : 20,
+    id : 2000
+}
+
+console.log(Object.keys(obj)); //  ["name", "age", "id"]
+
+// Object.value() trả về một mảng các giá trị đếm được cùa
+// một object đã cho 
+
+console.log(Object.values(obj)); // ["Ben", 20, 2000]
+
+//Object.prototype : thuộc tính prototype là một object mặc định có constructor
+//Tất cả các object trong js kế thừa các thuộc tính và phương thức từ prototype
+
+// Object.prototype.hasOwnProperty() : kiểm tra xem 1 object có thuộc tính 
+// đưa ra không . Trả về giá trị true false
+// cú pháp : obj.hasOwnProperty(prop);
+
+// Object.prototype.toString() : trả về chuỗi đại diện cho object
+// cú pháp : obj.toString();
+
+//Object.prototype.valueOf() : Trả về giá trị nguyên thủy của một object xác định.
+// cú pháp : object.valueOf();
