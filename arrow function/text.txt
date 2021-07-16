@@ -1,0 +1,80 @@
+// sự khác biệt giữa arrow function và function thông thường 
+---------------------------------------------------------------------------------
+// 1. Đối với giá trị this
+---------------------------------------------------------------------------------
+// 1.1 function thường
+// this gọi trong kiểu đơn giản là 1 global object ( hoặc là undefined
+// nếu function chạy trong strict mode)
+
+// this gọi trong phương thức của 1 object có giá trị là chính object
+// có phương thức đó
+
+// this gọi gián tiếp qua các hàm myFunc.call(thisVal, arg1, ..., argN)
+// hoặc myFunc.apply(thisVal, [arg1, ..., argN]) có giá trị là đối 
+// số đầu tiên 
+function myFunction() {
+    console.log(this);
+  }
+  
+  const myContext = { value: 'A'};
+  const helo = {value: 'B'}
+  
+myFunction.call(myContext,helo);  // logs { value: 'A' }
+myFunction.apply(myContext,helo); // logs { value: 'A' }
+// -> không hiện đối số helo
+
+// this được gọi trong constructor tương đương với việc tạo mới 
+// một hàm
+---------------------------------------------------------------------------------
+//1.2 Arrow function
+// trong bất cứ hoàn cảnh nảo , giá trị this trong 1 arrow function
+// luôn luôn bằng giá trị this ở ngoài function
+---------------------------------------------------------------------------------
+// 2.Constructors
+// arrow function không thế dùng để làm hàm constructor 
+---------------------------------------------------------------------------------
+// 3.arguments object
+---------------------------------------------------------------------------------
+//3.1 regular function 
+// argument trong fuction là 1 object chứa 1 lít các đối số mà 
+//function gọi
+---------------------------------------------------------------------------------
+// 3.2 arrow function
+// nếu gọi argument trong 1 arrow function , argument sẽ 
+// vẫn nhận giá trị của function bố mà không nhận giá trị 
+// của arrow function 
+
+function myRegularFunction() {
+    const myArrowFunction = () => {
+      console.log(arguments);
+    }
+  
+    myArrowFunction('c', 'd');
+  }
+  
+  myRegularFunction('a', 'b'); // log['a','b']
+  
+// muốn có thể truy cập arguments cảu arrow function thì 
+//  có thể dùng restParameter
+---------------------------------------------------------------------------------
+// 4. Ẩn đi return 
+---------------------------------------------------------------------------------
+// 4.1 regular function
+// giá trị return ở regular function có nhiệm vụ trả về kết
+// quả của một function, nếu không có return , hàm sẽ không có 
+// giá trị trả về hoặc return undefined
+---------------------------------------------------------------------------------
+// 4.2 arrow function 
+// có thể ẩn return khi viết code
+---------------------------------------------------------------------------------
+// 5. Methods
+
+// Như đã biết , this trong function và this trong methods là 
+// khác nhau ( phần 1 ), vì vậy khi ta cần gọi method như 1 callback
+// thì sẽ dẫn dến việc khó truy cập vào giá trị this
+// một trong những cách khắc phục điều này là bind giá trị this 
+// với đúng context của nó
+ 
+// Tuy nhiên trong arrow function thì this ở trong và ngoài arrow
+// function đều như nhau 
+---------------------------------------------------------------------------------

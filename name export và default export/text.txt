@@ -1,0 +1,9 @@
+// sự khác biệt giữa named export và default export 
+
+// named export : có thể export nhiều component trong 1 line 
+// named export được sử dụng để xuất nhiều thứ từ một module bằng cách thêm keyword export vào khai báo của chúng
+// tên của import phải giống với tên của export.
+
+// default export : chỉ có thể export 1 components mỗi file 
+// default export có thể cho một function, class hoặc một object.
+// ta có để bất cứ tên gì cho import
